@@ -61,7 +61,7 @@ function CadastroCategoria() {
         <PageDefault>
             <h1>
                 Cadastro de Categoria:
-        {values.nome}
+        {values.titulo}
             </h1>
             {/* State */}
             <form onSubmit={function handleSubmit(infosDoEvento) {
