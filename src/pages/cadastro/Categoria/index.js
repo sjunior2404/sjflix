@@ -3,29 +3,21 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import useForm from '../../../../src/hooks/useForm';
+
+
 
 function CadastroCategoria() {
     const valoresIniciais = {
-        nome: '',
+        titulo: '',
         descricao: '',
         cor: '',
 
     };
+    const { handleChange, values, clearForm } = useForm(valoresIniciais);
     const [categorias, setCategorias] = useState([]);
-    const [values, setValues] = useState(valoresIniciais);
 
-    function setValue(chave, valor) {
-        setValues({
-            ...values,
-            [chave]: valor,
-        });
-    }
-    function handleChange(infosDoEvento) {
-        setValue(
-            infosDoEvento.target.getAttribute('name'),
-            infosDoEvento.target.value,
-        );
-    }
+
     useEffect(() => {
         console.log('alo alo w brasil');
         const URL_TOP = 'https://sjflix.herokuapp.com/categorias';
@@ -70,14 +62,14 @@ function CadastroCategoria() {
                     ...categorias,
                     values,
                 ]);
-                setValues(valoresIniciais);
+                clearForm();
             }}
             >
                 <FormField
-                    label="Nome da Categoria"
+                    label="titulo da Categoria"
                     type="text"
-                    name="nome"
-                    value={values.nome}
+                    name="titulo"
+                    value={values.titulo}
                     onChange={handleChange}
                 />
                 <FormField
@@ -107,8 +99,8 @@ function CadastroCategoria() {
             </form>
             <ul>
                 {categorias.map((categoria) => (
-                    <li key={`${categoria.nome}`}>
-                        {categoria.nome}
+                    <li key={`${categoria.titulo}`}>
+                        {categoria.titulo}
                     </li>
                 ))}
             </ul>
